@@ -53,11 +53,11 @@ var numberOfGuests = document.getElementById('capacity');
 
 checkInTime.addEventListener('change', function () {
   if (checkInTime.options[0].selected) {
-   checkOutTime.options[0].selected = true;
+    checkOutTime.options[0].selected = true;
   } else if (checkInTime.options[1].selected) {
-   checkOutTime.options[1].selected = true;
+    checkOutTime.options[1].selected = true;
   } else {
-   checkOutTime.options[2].selected = true;
+    checkOutTime.options[2].selected = true;
   }
 });
 
