@@ -61,6 +61,16 @@ checkInTime.addEventListener('change', function () {
   }
 });
 
+checkOutTime.addEventListener('change', function () {
+  if (checkOutTime.options[0].selected) {
+    checkInTime.options[0].selected = true;
+  } else if (checkOutTime.options[1].selected) {
+    checkInTime.options[1].selected = true;
+  } else {
+    checkInTime.options[2].selected = true;
+  }
+});
+
 typeOfAccomodation.addEventListener('change', function () {
   if (typeOfAccomodation.options[0].selected) {
     pricePerNight.min = 1000;
