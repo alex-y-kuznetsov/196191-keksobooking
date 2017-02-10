@@ -2,7 +2,7 @@
 
 var ENTER_KEY_CODE = 13;
 
-//Изменение статуса aria-pressed и aria-hidden
+// Изменение статуса aria-pressed и aria-hidden
 var toggleAriaPressed = function (element) {
   var ariaPressed = (element.getAttribute('aria-pressed') === 'true');
   if (ariaPressed) {
@@ -65,13 +65,13 @@ pinMap.addEventListener('keydown', function (event) {
 var dialogClose = document.querySelector('.dialog__close');
 
 dialogClose.addEventListener('click', function (evt) {
-  if(isClick(evt)) {
+  if (isClick(evt)) {
     dialog.style.display = 'none';
     toggleAriaHidden(dialog);
   }
 });
 dialogClose.addEventListener('keydown', function (evt) {
-  if(isEnter(evt)) {
+  if (isEnter(evt)) {
     dialog.style.display = 'none';
     toggleAriaHidden(dialog);
   }
