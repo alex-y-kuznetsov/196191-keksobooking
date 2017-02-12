@@ -9,13 +9,13 @@ var toggleAria = function (element) {
     element.setAttribute('aria-pressed', 'false');
   } else {
     element.setAttribute('aria-pressed', 'true');
-  };
+  }
   var ariaHidden = (element.getAttribute('aria-hidden') === 'true');
   if (ariaHidden) {
     element.setAttribute('aria-hidden', 'false');
   } else {
     element.setAttribute('aria-hidden', 'true');
-  };
+  }
 };
 
 // Проверка на тип события
