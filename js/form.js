@@ -43,33 +43,27 @@ var openDialog = function (event) {
   dialog.style.display = 'block';
 };
 
-pinMap.addEventListener('click', function (event) {
+var openDialogEventListener = function (event) {
   if (event.target.closest('.pin') && eventType(event)) {
     openDialog(event);
   }
-});
+};
 
-pinMap.addEventListener('keydown', function (event) {
-  if (event.target.closest('.pin') && eventType(event)) {
-    openDialog(event);
-  }
-});
+pinMap.addEventListener('click', openDialogEventListener);
+pinMap.addEventListener('keydown', openDialogEventListener);
 
 // Скрытие карточки объявления
 var dialogClose = document.querySelector('.dialog__close');
 
-dialogClose.addEventListener('click', function (evt) {
+var closeDialogEventListener = function (evt) {
   if (eventType(evt)) {
     dialog.style.display = 'none';
     toggleAria(dialog);
   }
-});
-dialogClose.addEventListener('keydown', function (evt) {
-  if (eventType(evt)) {
-    dialog.style.display = 'none';
-    toggleAria(dialog);
-  }
-});
+};
+
+dialogClose.addEventListener('click', closeDialogEventListener);
+dialogClose.addEventListener('keydown', closeDialogEventListener);
 
 // Проверка введенных данных в форме
 var adTitle = document.getElementById('title');
