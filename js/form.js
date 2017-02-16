@@ -59,6 +59,7 @@ var closeDialogEventListener = function (evt) {
   if (eventType(evt)) {
     dialog.style.display = 'none';
     toggleAria(dialog);
+    pinDeactivate();
   }
 };
 
