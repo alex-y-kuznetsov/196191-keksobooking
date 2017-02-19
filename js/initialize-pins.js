@@ -1,6 +1,8 @@
 'use strict';
 
 window.initializePins = (function () {
+  var pinMain = document.querySelector('.pin__main');
+  var pinMap = document.querySelector('.tokyo__pin-map');
 
   // Изменение статуса aria-pressed и aria-hidden
   var toggleAria = function (element) {
@@ -25,8 +27,18 @@ window.initializePins = (function () {
       pinActive.classList.remove('pin--active');
       toggleAria(pinActive);
     }
-
   };
+
+  pinMap.addEventListener('click', window.showCard.openDialogEventListener);
+  pinMap.addEventListener('keydown', window.showCard.openDialogEventListener);
+  pinMap.addEventListener('keydown', function (evt) {
+    if (window.showCard.eventType(evt)) {
+      window.showCard(function () {
+        pinMain.focus();
+      })
+    }
+  });
+
   return {
     pinDeactivate: pinDeactivate,
     toggleAria: toggleAria

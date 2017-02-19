@@ -10,8 +10,8 @@ window.showCard = (function () {
   };
 
   // Показ карточки объявления
-  var pinMap = document.querySelector('.tokyo__pin-map');
   var dialog = document.querySelector('.dialog');
+  var onDialogClose = null;
 
   var openDialog = function (event) {
     window.initializePins.pinDeactivate();
@@ -27,9 +27,6 @@ window.showCard = (function () {
     }
   };
 
-  pinMap.addEventListener('click', openDialogEventListener);
-  pinMap.addEventListener('keydown', openDialogEventListener);
-
   // Скрытие карточки объявления
   var dialogClose = document.querySelector('.dialog__close');
 
@@ -37,10 +34,24 @@ window.showCard = (function () {
     if (eventType(evt)) {
       dialog.style.display = 'none';
       window.initializePins.toggleAria(dialog);
+      if (typeof onDialogClose === 'function') {
+        onDialogClose();
+      };
       window.initializePins.pinDeactivate();
     }
   };
 
   dialogClose.addEventListener('click', closeDialogEventListener);
   dialogClose.addEventListener('keydown', closeDialogEventListener);
+
+  return {
+    openDialogEventListener: openDialogEventListener,
+    closeDialogEventListener: closeDialogEventListener,
+    eventType: eventType
+  };
+
+  return function (cb) {
+    openDialog();
+    onDialogClose = cb;
+  };
 })();
