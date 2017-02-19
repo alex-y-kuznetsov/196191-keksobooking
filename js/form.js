@@ -2,8 +2,8 @@
 
 (function () {
   // Отрисовка пинов, показ карточки объявления, изменение ARIA-ролей
-  window.initializePins();
-  window.showCard();
+  // window.initializePins();
+  // window.showCard();
 
   // Проверка введенных данных
   var adTitle = document.getElementById('title');
