@@ -3,6 +3,12 @@
 window.initializePins = (function () {
   var pinMain = document.querySelector('.pin__main');
   var pinMap = document.querySelector('.tokyo__pin-map');
+  var ENTER_KEY_CODE = 13;
+
+  // Проверка на тип события
+  var eventType = function (event) {
+    return (event.keyCode && event.keyCode === ENTER_KEY_CODE) || event.type === 'click';
+  };
 
   // Изменение статуса aria-pressed и aria-hidden
   var toggleAria = function (element) {
@@ -29,18 +35,26 @@ window.initializePins = (function () {
     }
   };
 
-  pinMap.addEventListener('click', window.showCard.openDialogEventListener);
-  pinMap.addEventListener('keydown', window.showCard.openDialogEventListener);
-  pinMap.addEventListener('keydown', function (evt) {
-    if (window.showCard.eventType(evt)) {
+  pinMap.addEventListener('click', function (event) {
+    if (event.target.closest('.pin')) {
+      window.showCard(function () {
+        pinDeactivate();
+      })
+    }
+  });
+  pinMap.addEventListener('keydown', function (event) {
+    if (event.target.closest('.pin') && eventType(event)) {
       window.showCard(function () {
         pinMain.focus();
+        pinDeactivate();
+        console.log('works');
       })
     }
   });
 
   return {
     pinDeactivate: pinDeactivate,
-    toggleAria: toggleAria
+    toggleAria: toggleAria,
+    eventType: eventType
   };
 })();
