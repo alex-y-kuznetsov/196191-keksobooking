@@ -47,8 +47,8 @@ window.initializePins = (function () {
       window.showCard(function () {
         pinMain.focus();
         pinDeactivate();
-      })
-    };
+      });
+    }
   });
 
   return {
