@@ -37,6 +37,7 @@ window.initializePins = (function () {
 
   pinMap.addEventListener('click', function (event) {
     if (event.target.closest('.pin')) {
+      pinDeactivate();
       window.showCard(function () {
         pinDeactivate();
       });
@@ -44,8 +45,9 @@ window.initializePins = (function () {
   });
   pinMap.addEventListener('keydown', function (event) {
     if (event.target.closest('.pin') && eventType(event)) {
+      pinDeactivate();
       window.showCard(function () {
-        pinMain.focus();
+        document.querySelector('.pin--active img').focus();
         pinDeactivate();
       });
     }
