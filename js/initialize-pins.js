@@ -1,7 +1,6 @@
 'use strict';
 
 window.initializePins = (function () {
-  var pinMain = document.querySelector('.pin__main');
   var pinMap = document.querySelector('.tokyo__pin-map');
   var ENTER_KEY_CODE = 13;
 
