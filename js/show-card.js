@@ -7,7 +7,6 @@ window.showCard = (function () {
   var onDialogClose = null;
 
   var openDialog = function (event) {
-    window.initializePins.pinDeactivate();
     event.target.closest('.pin').classList.add('pin--active');
     window.initializePins.toggleAria(event.target.closest('.pin'));
     window.initializePins.toggleAria(dialog);
@@ -24,7 +23,6 @@ window.showCard = (function () {
       if (typeof onDialogClose === 'function') {
         onDialogClose();
       }
-      // window.initializePins.pinDeactivate();
     }
   };
 
