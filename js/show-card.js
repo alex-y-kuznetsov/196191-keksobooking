@@ -6,7 +6,7 @@ window.showCard = (function () {
   var dialog = document.querySelector('.dialog');
   var onDialogClose = null;
 
-  var openDialog = function (event) {
+  var openDialog = function () {
     window.utils.toggleAria(dialog);
     dialog.style.display = 'block';
   };
@@ -28,7 +28,7 @@ window.showCard = (function () {
   dialogClose.addEventListener('keydown', closeDialog);
 
   return function (cb) {
-    openDialog(event);
+    openDialog();
     onDialogClose = cb;
   };
 })();
