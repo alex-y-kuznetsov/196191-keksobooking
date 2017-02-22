@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  // window.initializePins();
 
   // Проверка введенных данных
   var adTitle = document.getElementById('title');
