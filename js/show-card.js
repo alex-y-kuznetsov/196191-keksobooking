@@ -7,9 +7,7 @@ window.showCard = (function () {
   var onDialogClose = null;
 
   var openDialog = function (event) {
-    event.target.closest('.pin').classList.add('pin--active');
-    window.initializePins.toggleAria(event.target.closest('.pin'));
-    window.initializePins.toggleAria(dialog);
+    window.utils.toggleAria(dialog);
     dialog.style.display = 'block';
   };
 
@@ -17,9 +15,9 @@ window.showCard = (function () {
   var dialogClose = document.querySelector('.dialog__close');
 
   var closeDialog = function (evt) {
-    if (window.initializePins.eventType(evt)) {
+    if (window.utils.eventType(evt)) {
       dialog.style.display = 'none';
-      window.initializePins.toggleAria(dialog);
+      window.utils.toggleAria(dialog);
       if (typeof onDialogClose === 'function') {
         onDialogClose();
       }
