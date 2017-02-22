@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-  // Отрисовка пинов, показ карточки объявления, изменение ARIA-ролей
-  window.initializePins();
 
   // Проверка введенных данных
   var adTitle = document.getElementById('title');
@@ -32,7 +30,14 @@
   var numberOfRoomsArray = ['1 room', '2 rooms', '100 rooms'];
   var numberOfGuestsArray = ['0 guests', '3 guests', '3 guests'];
 
-  window.synchronizeFields(checkInTime, checkOutTime, checkInTimeArray, checkOutTimeArray, 'value');
-  window.synchronizeFields(typeOfAccomodation, pricePerNight, typeOfAccomodationArray, pricePerNightArray, 'min');
-  window.synchronizeFields(numberOfRooms, numberOfGuests, numberOfRoomsArray, numberOfGuestsArray, 'value');
+  var syncValues = function (element, value) {
+    element.value = value;
+  };
+  var syncValueWithMin = function (element, value) {
+    element.min = value;
+  };
+
+  window.synchronizeFields(checkInTime, checkOutTime, checkInTimeArray, checkOutTimeArray, syncValues);
+  window.synchronizeFields(typeOfAccomodation, pricePerNight, typeOfAccomodationArray, pricePerNightArray, syncValueWithMin);
+  window.synchronizeFields(numberOfRooms, numberOfGuests, numberOfRoomsArray, numberOfGuestsArray, syncValues);
 })();
