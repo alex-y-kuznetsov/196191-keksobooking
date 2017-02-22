@@ -14,9 +14,11 @@ window.initializePins = (function () {
 
   // Активация пинов
   var activatePin = function (pin) {
-    clearPins();
-    pin.classList.add('pin--active');
-    window.utils.toggleAria(pin);
+    if (pin) {
+      clearPins();
+      pin.classList.add('pin--active');
+      window.utils.toggleAria(pin);
+    }
   };
 
   pinMap.addEventListener('click', function (event) {
