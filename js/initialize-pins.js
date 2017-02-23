@@ -12,6 +12,7 @@ window.initializePins = (function () {
     });
     return similarApartments;
   };
+  getData();
 
   // Отрисовка клона
   var drawClonePin = function (data) {
