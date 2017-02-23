@@ -3,8 +3,8 @@
 window.load = (function () {
 
   var errorHandler = function (err) {
-    console.log(err);
-  }
+    return err;
+  };
 
   return function (url, onLoad, onError) {
     var xhr = new XMLHttpRequest();

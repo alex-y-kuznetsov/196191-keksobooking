@@ -10,6 +10,7 @@ window.initializePins = (function () {
     window.load(DATA_URL, function (data) {
       similarApartments = data;
     });
+    return similarApartments;
   };
 
   // Отрисовка клона
@@ -27,7 +28,7 @@ window.initializePins = (function () {
     return newElement;
   };
 
-  //Отрисовка похожих объявлений
+  // Отрисовка похожих объявлений
   var drawSimilarApartments = function () {
     var slicedApartmentsArray = similarApartments.slice(0, 3);
 
@@ -35,6 +36,7 @@ window.initializePins = (function () {
       pinMap.appendChild(drawClonePin(item));
     });
   };
+  drawSimilarApartments();
 
   // Очистка пинов
   var clearPins = function () {
