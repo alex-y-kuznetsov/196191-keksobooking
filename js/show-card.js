@@ -34,6 +34,8 @@ window.showCard = (function () {
     dialogRoomsAndGuests.innertext = data.offer.rooms + 'комнаты для ' + data.offer.guests + 'гостей.';
     dialogCheckIn.innertext = 'Заезд после ' + data.offer.checkin + ', выезд до ' + data.offer.checkout;
     dialogDescription.innerText = data.offer.description;
+    dialogFeatures.innerHTML = '';
+    dialogPhotos.innerHTML = '';
 
     data.offer.features.forEach(function (item) {
       var featureElement = document.createElement('span');
@@ -43,6 +45,8 @@ window.showCard = (function () {
     });
     data.offer.photos.forEach(function (item) {
       var imageElement = document.createElement('img');
+      imageElement.setAttribute('width', 52);
+      imageElement.setAttribute('height', 42);
       imageElement.src = item;
       dialogPhotos.appendChild(imageElement);
     });
