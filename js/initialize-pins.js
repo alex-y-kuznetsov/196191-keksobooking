@@ -20,6 +20,7 @@ window.initializePins = (function () {
     var templateElement = document.querySelector('#pin-template');
     var elementToClone = templateElement.content.querySelector('.element-to-clone');
     var newElement = elementToClone.cloneNode(true);
+    newElement.dataset.pin = JSON.stringify(data);
     var avatar = newElement.querySelector('img');
 
     avatar.src = data.author.avatar;
@@ -38,7 +39,6 @@ window.initializePins = (function () {
       pinMap.appendChild(drawClonePin(item));
     });
   };
-
 
   // Очистка пинов
   var clearPins = function () {
@@ -60,20 +60,18 @@ window.initializePins = (function () {
 
   pinMap.addEventListener('click', function (event) {
     activatePin(event.target.closest('.pin'));
-    window.showCard(function () {
+    window.showCard(JSON.parse(event.target.closest('.pin').dataset.pin), function () {
       clearPins();
     });
   });
   pinMap.addEventListener('keydown', function (event) {
     if (window.utils.eventType(event)) {
       activatePin(event.target.closest('.pin'));
-      window.showCard(function () {
+      window.showCard(JSON.parse(event.target.closest('.pin').dataset.pin), function () {
         document.querySelector('.pin--active img').focus();
         clearPins();
       });
     }
   });
-  return {
-    getData: getData
-  };
+
 })();
