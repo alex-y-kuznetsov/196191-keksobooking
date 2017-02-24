@@ -9,6 +9,7 @@ window.initializePins = (function () {
   var getData = function () {
     window.load(DATA_URL, function (data) {
       similarApartments = data;
+      drawSimilarApartments();
     });
     return similarApartments;
   };
@@ -37,7 +38,7 @@ window.initializePins = (function () {
       pinMap.appendChild(drawClonePin(item));
     });
   };
-  drawSimilarApartments();
+
 
   // Очистка пинов
   var clearPins = function () {
@@ -72,4 +73,7 @@ window.initializePins = (function () {
       });
     }
   });
+  return {
+    getData: getData
+  }
 })();
