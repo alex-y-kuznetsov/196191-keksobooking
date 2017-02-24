@@ -75,5 +75,5 @@ window.initializePins = (function () {
   });
   return {
     getData: getData
-  }
+  };
 })();
