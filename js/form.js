@@ -2,6 +2,8 @@
 
 (function () {
 
+  window.initializePins();
+
   // Проверка введенных данных
   var adTitle = document.getElementById('title');
   var pricePerNight = document.getElementById('price');
