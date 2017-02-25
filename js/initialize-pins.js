@@ -10,7 +10,7 @@ window.initializePins = function () {
     window.load(DATA_URL, function (data) {
       similarApartments = data;
       var slicedApartmentsArray = similarApartments.slice(0, 3);
-      drawSimilarApartments(slicedApartmentsArray); // Функция орисовывает 3 первых пина из массива similarApartments
+      drawSimilarApartments(slicedApartmentsArray);
     });
     return similarApartments;
   };
