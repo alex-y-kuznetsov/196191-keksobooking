@@ -32,7 +32,7 @@ window.initializePins = function () {
   };
 
   // Отрисовка похожих объявлений
-  var drawSimilarApartments = function (arr) { // Принимает на вход массив, нужно для отрисовки пинов по фильтрам
+  var drawSimilarApartments = function () {
     var slicedApartmentsArray = similarApartments.slice(0, 3);
 
     slicedApartmentsArray.forEach(function (item) {
@@ -58,7 +58,6 @@ window.initializePins = function () {
     }
   };
 
-
   pinMap.addEventListener('click', function (event) {
     var pinData = event.target.closest('.pin').dataset.pin;
     activatePin(event.target.closest('.pin'));
@@ -80,5 +79,4 @@ window.initializePins = function () {
       }
     }
   });
-
 };
