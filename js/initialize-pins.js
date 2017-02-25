@@ -26,7 +26,7 @@ window.initializePins = (function () {
     avatar.src = data.author.avatar;
     newElement.style.left = data.location.x + 'px';
     newElement.style.top = data.location.y + 'px';
-    newElement.setAttribute('tabindex', 0);
+    avatar.setAttribute('tabindex', 0);
 
     return newElement;
   };
