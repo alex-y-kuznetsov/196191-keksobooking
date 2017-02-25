@@ -1,6 +1,6 @@
 'use strict';
 
-window.initializePins = (function () {
+window.initializePins = function () {
   var pinMap = document.querySelector('.tokyo__pin-map');
   var DATA_URL = 'https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data';
   var similarApartments = [];
@@ -74,4 +74,4 @@ window.initializePins = (function () {
     }
   });
 
-})();
+};
