@@ -9,7 +9,8 @@ window.initializePins = function () {
   var getData = function () {
     window.load(DATA_URL, function (data) {
       similarApartments = data;
-      drawSimilarApartments(similarApartments); // Функция орисовывает 3 первых пина из массива similarApartments
+      var slicedApartmentsArray = similarApartments.slice(0, 3);
+      drawSimilarApartments(slicedApartmentsArray); // Функция орисовывает 3 первых пина из массива similarApartments
     });
     return similarApartments;
   };
@@ -34,9 +35,7 @@ window.initializePins = function () {
 
   // Отрисовка похожих объявлений
   var drawSimilarApartments = function (arr) {
-    var slicedApartmentsArray = arr.slice(0, 3);
-
-    slicedApartmentsArray.forEach(function (item) {
+    arr.forEach(function (item) {
       pinMap.appendChild(drawClonePin(item));
     });
   };
