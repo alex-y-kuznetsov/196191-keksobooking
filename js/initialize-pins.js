@@ -27,13 +27,14 @@ window.initializePins = function () {
     newElement.style.left = data.location.x + 'px';
     newElement.style.top = data.location.y + 'px';
     avatar.setAttribute('tabindex', 0);
+    newElement.classList.add('pin');
 
     return newElement;
   };
 
   // Отрисовка похожих объявлений
-  var drawSimilarApartments = function (фкк) {
-    var slicedApartmentsArray = similarApartments.slice(0, 3);
+  var drawSimilarApartments = function (arr) {
+    var slicedApartmentsArray = arr.slice(0, 3);
 
     slicedApartmentsArray.forEach(function (item) {
       pinMap.appendChild(drawClonePin(item));
@@ -70,13 +71,14 @@ window.initializePins = function () {
   var ANY_VALUE = 'any';
 
   // Очитска пинов перед фильтрами
-  var clearTokyo = function (item) {
-    // newDialogElement.style.display = 'none'; // как к нему обратиться?
-    // window.utils.toggleAria(newDialogElement);
+  var clearTokyo = function () {
+    var pins = tokyo.querySelectorAll('.pin');
     clearPins();
-    if (!item.classList.contains('.pin__main')) {
-      tokyo.removeChild(item);
-    }
+    pins.forEach(function (item) {
+      if (!item.classList.contains('pin__main')) {
+        pinMap.removeChild(item);
+      }
+    });
   };
 
   // Проверки
@@ -84,7 +86,7 @@ window.initializePins = function () {
     return (housingType.value === ANY_VALUE) || (housingType.value === data.offer.type);
   };
 
-  var isInRangePrice = function (item) { // (item)?
+  var isInRangePrice = function (item) {
     if (housingPrice.value === 'low') {
       return item.offer.price < 10000;
     } else if (housingPrice.value === 'middle') {

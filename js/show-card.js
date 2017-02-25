@@ -36,6 +36,7 @@ window.showCard = (function () {
     dialogDescription.innerText = data.offer.description;
     dialogFeatures.innerHTML = '';
     dialogPhotos.innerHTML = '';
+    newDialogElement.classList.add('dialog');
 
     data.offer.features.forEach(function (item) {
       var featureElement = document.createElement('span');
