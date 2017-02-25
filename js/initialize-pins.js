@@ -125,7 +125,7 @@ window.initializePins = function () {
   };
 
   var applyApartmentFilters = function (item) {
-    return isInRangeType(item) && isInRangePrice(item) && isInRangeRooms(item) && isInRangeGuests(item) && isInRangeFeatures (item);
+    return isInRangeType(item) && isInRangePrice(item) && isInRangeRooms(item) && isInRangeGuests(item) && isInRangeFeatures(item);
   };
 
   // Обновление пинов
