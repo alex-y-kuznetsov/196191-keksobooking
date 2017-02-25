@@ -5,8 +5,7 @@ window.showCard = (function () {
   // Показ карточки объявления
   var tokyo = document.querySelector('.tokyo');
   var onDialogClose = null;
-  var dialogTemplate = document.querySelector('#dialog-template');
-  var dialogToClone = dialogTemplate.content.querySelector('.dialog');
+  var dialogToClone = document.querySelector('.dialog');
   var newDialogElement = dialogToClone.cloneNode(true);
   var dialogImage = newDialogElement.querySelector('img');
   var dialogTitle = newDialogElement.querySelector('.lodge__title');
@@ -19,6 +18,7 @@ window.showCard = (function () {
   var dialogDescription = newDialogElement.querySelector('.lodge__description');
   var dialogPhotos = newDialogElement.querySelector('.lodge__photos');
 
+  dialogToClone.style.display = 'none';
   newDialogElement.style.display = 'none';
 
   var openDialog = function (data) {
