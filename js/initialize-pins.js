@@ -9,7 +9,7 @@ window.initializePins = function () {
   var getData = function () {
     window.load(DATA_URL, function (data) {
       similarApartments = data;
-      drawSimilarApartments();
+      drawSimilarApartments(); // Функция орисовывает 3 первых пина из массива similarApartments
     });
     return similarApartments;
   };
@@ -32,7 +32,7 @@ window.initializePins = function () {
   };
 
   // Отрисовка похожих объявлений
-  var drawSimilarApartments = function () {
+  var drawSimilarApartments = function (arr) { // Принимает на вход массив, нужно для отрисовки пинов по фильтрам
     var slicedApartmentsArray = similarApartments.slice(0, 3);
 
     slicedApartmentsArray.forEach(function (item) {
@@ -58,19 +58,26 @@ window.initializePins = function () {
     }
   };
 
+
   pinMap.addEventListener('click', function (event) {
+    var pinData = event.target.closest('.pin').dataset.pin;
     activatePin(event.target.closest('.pin'));
-    window.showCard(JSON.parse(event.target.closest('.pin').dataset.pin), function () {
-      clearPins();
-    });
-  });
-  pinMap.addEventListener('keydown', function (event) {
-    if (window.utils.eventType(event)) {
-      activatePin(event.target.closest('.pin'));
+    if (pinData) {
       window.showCard(JSON.parse(event.target.closest('.pin').dataset.pin), function () {
-        document.querySelector('.pin--active img').focus();
         clearPins();
       });
+    }
+  });
+  pinMap.addEventListener('keydown', function (event) {
+    var pinData = event.target.closest('.pin').dataset.pin;
+    if (window.utils.eventType(event)) {
+      activatePin(event.target.closest('.pin'));
+      if (pinData) {
+        window.showCard(JSON.parse(event.target.closest('.pin').dataset.pin), function () {
+          document.querySelector('.pin--active img').focus();
+          clearPins();
+        });
+      }
     }
   });
 
