@@ -9,7 +9,7 @@ window.initializePins = function () {
   var getData = function () {
     window.load(DATA_URL, function (data) {
       similarApartments = data;
-      drawSimilarApartments(); // Функция орисовывает 3 первых пина из массива similarApartments
+      drawSimilarApartments(similarApartments); // Функция орисовывает 3 первых пина из массива similarApartments
     });
     return similarApartments;
   };
@@ -32,7 +32,7 @@ window.initializePins = function () {
   };
 
   // Отрисовка похожих объявлений
-  var drawSimilarApartments = function () {
+  var drawSimilarApartments = function (фкк) {
     var slicedApartmentsArray = similarApartments.slice(0, 3);
 
     slicedApartmentsArray.forEach(function (item) {
@@ -57,6 +57,82 @@ window.initializePins = function () {
       window.utils.toggleAria(pin);
     }
   };
+
+  var tokyo = document.querySelector('.tokyo');
+  var tokyoFilters = document.querySelector('.tokyo__filters');
+  var housingType = tokyoFilters.querySelector('#housing_type');
+  var housingPrice = tokyoFilters.querySelector('#housing_price');
+  var housingRooms = tokyoFilters.querySelector('#housing_room-number');
+  var housingGuests = tokyoFilters.querySelector('#housing_guests-number');
+  var housingFeatures = tokyoFilters.querySelector('#housing_features');
+  var housingFeaturesCheckboxes = housingFeatures.querySelector('input[type=checkbox]');
+
+  var ANY_VALUE = 'any';
+
+  // Очитска пинов перед фильтрами
+  var clearTokyo = function (item) {
+    // newDialogElement.style.display = 'none'; // как к нему обратиться?
+    // window.utils.toggleAria(newDialogElement);
+    clearPins();
+    if (!item.classList.contains('.pin__main')) {
+      tokyo.removeChild(item);
+    }
+  };
+
+  // Проверки
+  var isInRangeType = function (data) {
+    return (housingType.value === ANY_VALUE) || (housingType.value === data.offer.type);
+  };
+
+  var isInRangePrice = function (item) { // (item)?
+    if (housingPrice.value === 'low') {
+      return item.offer.price < 10000;
+    } else if (housingPrice.value === 'middle') {
+      return item.offer.price >= 10000 && item.offer.price <= 50000;
+    } else if (housingPrice.value === 'high') {
+      return item.offer.price > 50000;
+    } else {
+      return false;
+    }
+  };
+
+  var isInRangeRooms = function (data) {
+    return (housingRooms.value === ANY_VALUE) || (+housingRooms.value === data.offer.rooms);
+  };
+
+  var isInRangeGuests = function (data) {
+    return (housingGuests.value === ANY_VALUE) || (+housingGuests.value === data.offer.guests);
+  };
+
+  var isInRangeFeatures = function (data) {
+
+    var isCheckedFeature = function (feature) {
+      return feature.checked;
+    };
+
+    var getFeatureValue = function (feature) {
+      return feature.value;
+    };
+
+    var checkedFeatures = [].filter.call(housingFeaturesCheckboxes, isCheckedFeature).map(getFeatureValue);
+    var apartmentFeatures = data.offer.features;
+
+    var checkFeatures = function (feature) {
+      return apartmentFeatures.indexOf(feature) !== -1;
+    };
+
+    return (checkedFeatures.length === 0) || (checkedFeatures.every(checkFeatures));
+  };
+
+  var applyApartmentFilters = function (item) {
+    return isInRangeType(item) && isInRangePrice(item) && isInRangeRooms(item) && isInRangeGuests(item) && isInRangeFeatures (item);
+  };
+
+  // Обновление пинов
+  tokyoFilters.addEventListener('change', function () {
+    clearTokyo(pinMap);
+    drawSimilarApartments(similarApartments.filter(applyApartmentFilters));
+  });
 
   pinMap.addEventListener('click', function (event) {
     var pinData = event.target.closest('.pin').dataset.pin;

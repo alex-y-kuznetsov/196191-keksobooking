@@ -52,6 +52,7 @@ window.showCard = (function () {
     });
 
     tokyo.appendChild(newDialogElement);
+    return newDialogElement;
 
   };
 
