@@ -44,6 +44,7 @@ window.showCard = (function () {
       featureElement.classList.add('feature__image--' + item);
       dialogFeatures.appendChild(featureElement);
     });
+
     data.offer.photos.forEach(function (item) {
       var imageElement = document.createElement('img');
       imageElement.setAttribute('width', 52);
@@ -54,7 +55,6 @@ window.showCard = (function () {
 
     tokyo.appendChild(newDialogElement);
     return newDialogElement;
-
   };
 
   // Скрытие карточки объявления

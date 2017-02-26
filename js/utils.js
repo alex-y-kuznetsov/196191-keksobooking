@@ -1,4 +1,5 @@
 'use strict';
+
 window.utils = (function () {
 
   var ENTER_KEY_CODE = 13;
@@ -10,14 +11,12 @@ window.utils = (function () {
 
   // Изменение статуса aria-pressed и aria-hidden
   var toggleAria = function (element) {
-    var ariaPressed = (element.getAttribute('aria-pressed') === 'true');
-    if (ariaPressed) {
+    if (element.getAttribute('aria-pressed') === 'true') {
       element.setAttribute('aria-pressed', 'false');
     } else {
       element.setAttribute('aria-pressed', 'true');
     }
-    var ariaHidden = (element.getAttribute('aria-hidden') === 'true');
-    if (ariaHidden) {
+    if (element.getAttribute('aria-hidden') === 'true') {
       element.setAttribute('aria-hidden', 'false');
     } else {
       element.setAttribute('aria-hidden', 'true');
