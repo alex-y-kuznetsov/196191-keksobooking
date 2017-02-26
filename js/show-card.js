@@ -54,7 +54,6 @@ window.showCard = (function () {
     });
 
     tokyo.appendChild(newDialogElement);
-    document.querySelector('.dialog__close img').focus();
     return newDialogElement;
   };
 
