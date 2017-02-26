@@ -64,8 +64,7 @@ window.initializePins = function () {
   var housingPrice = tokyoFilters.querySelector('#housing_price');
   var housingRooms = tokyoFilters.querySelector('#housing_room-number');
   var housingGuests = tokyoFilters.querySelector('#housing_guests-number');
-  var housingFeatures = tokyoFilters.querySelector('#housing_features');
-  var housingFeaturesCheckboxes = housingFeatures.querySelectorAll('input[type=checkbox]');
+  var housingFeaturesCheckboxes = tokyoFilters.querySelectorAll('#housing_features input[type=checkbox]');
 
   var ANY_VALUE = 'any';
 
