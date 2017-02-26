@@ -18,19 +18,19 @@ window.initializePins = function () {
 
   // Отрисовка клона
   var drawClonePin = function (data) {
-    var templateElement = document.querySelector('#pin-template');
-    var elementToClone = templateElement.content.querySelector('.element-to-clone');
-    var newElement = elementToClone.cloneNode(true);
-    newElement.dataset.pin = JSON.stringify(data);
-    var avatar = newElement.querySelector('img');
+    var pinTemplateElement = document.querySelector('#pin-template');
+    var pinElementToClone = pinTemplateElement.content.querySelector('.element-to-clone');
+    var newPinElement = pinElementToClone.cloneNode(true);
+    newPinElement.dataset.pin = JSON.stringify(data);
+    var avatar = newPinElement.querySelector('img');
 
     avatar.src = data.author.avatar;
-    newElement.style.left = data.location.x + 'px';
-    newElement.style.top = data.location.y + 'px';
+    newPinElement.style.left = data.location.x + 'px';
+    newPinElement.style.top = data.location.y + 'px';
     avatar.setAttribute('tabindex', 0);
-    newElement.classList.add('pin');
+    newPinElement.classList.add('pin');
 
-    return newElement;
+    return newPinElement;
   };
 
   // Отрисовка похожих объявлений
@@ -65,7 +65,7 @@ window.initializePins = function () {
   var housingRooms = tokyoFilters.querySelector('#housing_room-number');
   var housingGuests = tokyoFilters.querySelector('#housing_guests-number');
   var housingFeatures = tokyoFilters.querySelector('#housing_features');
-  var housingFeaturesCheckboxes = housingFeatures.querySelector('input[type=checkbox]');
+  var housingFeaturesCheckboxes = housingFeatures.querySelectorAll('input[type=checkbox]');
 
   var ANY_VALUE = 'any';
 
@@ -80,7 +80,7 @@ window.initializePins = function () {
     });
   };
 
-  // Проверки
+  // Проверки фильтров
   var isInRangeType = function (data) {
     return (housingType.value === ANY_VALUE) || (housingType.value === data.offer.type);
   };
