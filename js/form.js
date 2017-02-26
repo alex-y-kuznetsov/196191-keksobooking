@@ -37,6 +37,7 @@
   };
   var syncValueWithMin = function (element, value) {
     element.min = value;
+    element.setAttribute('placeholder', document.querySelector('#price').getAttribute('min'));
   };
 
   window.synchronizeFields(checkInTime, checkOutTime, checkInTimeArray, checkOutTimeArray, syncValues);

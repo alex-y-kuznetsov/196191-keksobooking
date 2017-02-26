@@ -58,7 +58,7 @@ window.showCard = (function () {
   };
 
   // Скрытие карточки объявления
-  var dialogClose = newDialogElement.querySelector('.dialog__close');
+  var dialogCloseBtn = newDialogElement.querySelector('.dialog__close');
 
   var closeDialog = function (evt) {
     if (window.utils.eventType(evt)) {
@@ -70,8 +70,8 @@ window.showCard = (function () {
     }
   };
 
-  dialogClose.addEventListener('click', closeDialog);
-  dialogClose.addEventListener('keydown', closeDialog);
+  dialogCloseBtn.addEventListener('click', closeDialog);
+  dialogCloseBtn.addEventListener('keydown', closeDialog);
 
   return function (data, cb) {
     openDialog(data);

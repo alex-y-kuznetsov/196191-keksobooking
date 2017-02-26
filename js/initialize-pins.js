@@ -30,6 +30,9 @@ window.initializePins = function () {
     avatar.setAttribute('tabindex', 0);
     newPinElement.classList.add('pin');
 
+    pinMap.addEventListener('click', pinClickHandler);
+    pinMap.addEventListener('keydown', pinEnterKeyHandler);
+
     return newPinElement;
   };
 
@@ -38,6 +41,7 @@ window.initializePins = function () {
     arr.forEach(function (item) {
       pinMap.appendChild(drawClonePin(item));
     });
+
   };
 
   // Очистка пинов
@@ -77,11 +81,16 @@ window.initializePins = function () {
         pinMap.removeChild(item);
       }
     });
+    pinMap.removeEventListener('click', pinClickHandler);
+    pinMap.removeEventListener('keydown', pinEnterKeyHandler);
   };
 
   // Проверки фильтров
   var isInRangeType = function (data) {
     return (housingType.value === ANY_VALUE) || (housingType.value === data.offer.type);
+  };
+  var isInRangeNumeric = function (filterValue, dataValue) {
+    return (filterValue === ANY_VALUE) || (parseInt(filterValue, 10) === dataValue);
   };
 
   var isInRangePrice = function (item) {
@@ -89,19 +98,11 @@ window.initializePins = function () {
       return item.offer.price < 10000;
     } else if (housingPrice.value === 'middle') {
       return item.offer.price >= 10000 && item.offer.price <= 50000;
-    } else if (housingPrice.value === 'high') {
+    } else if (housingPrice.value === 'hight') {
       return item.offer.price > 50000;
     } else {
       return false;
     }
-  };
-
-  var isInRangeRooms = function (data) {
-    return (housingRooms.value === ANY_VALUE) || (+housingRooms.value === data.offer.rooms);
-  };
-
-  var isInRangeGuests = function (data) {
-    return (housingGuests.value === ANY_VALUE) || (+housingGuests.value === data.offer.guests);
   };
 
   var isInRangeFeatures = function (data) {
@@ -125,16 +126,14 @@ window.initializePins = function () {
   };
 
   var applyApartmentFilters = function (item) {
-    return isInRangeType(item) && isInRangePrice(item) && isInRangeRooms(item) && isInRangeGuests(item) && isInRangeFeatures(item);
+    return isInRangeType(item) &&
+      isInRangePrice(item) &&
+      isInRangeNumeric(housingRooms.value, item.offer.rooms) &&
+      isInRangeNumeric(housingGuests.value, item.offer.guests) &&
+      isInRangeFeatures(item);
   };
 
-  // Обновление пинов
-  tokyoFilters.addEventListener('change', function () {
-    clearTokyo(pinMap);
-    drawSimilarApartments(similarApartments.filter(applyApartmentFilters));
-  });
-
-  pinMap.addEventListener('click', function (event) {
+  var pinClickHandler = function (event) {
     var pinData = event.target.closest('.pin').dataset.pin;
     activatePin(event.target.closest('.pin'));
     if (pinData) {
@@ -142,8 +141,8 @@ window.initializePins = function () {
         clearPins();
       });
     }
-  });
-  pinMap.addEventListener('keydown', function (event) {
+  };
+  var pinEnterKeyHandler = function (event) {
     var pinData = event.target.closest('.pin').dataset.pin;
     if (window.utils.eventType(event)) {
       activatePin(event.target.closest('.pin'));
@@ -154,5 +153,11 @@ window.initializePins = function () {
         });
       }
     }
+  };
+
+  // Обновление пинов
+  tokyoFilters.addEventListener('change', function () {
+    clearTokyo(pinMap);
+    drawSimilarApartments(similarApartments.filter(applyApartmentFilters));
   });
 };
