@@ -90,7 +90,7 @@ window.initializePins = function () {
     return (housingType.value === ANY_VALUE) || (housingType.value === data.offer.type);
   };
   var isInRangeNumeric = function (filterValue, dataValue) {
-     return (filterValue === ANY_VALUE) || (parseInt(filterValue, 10) === dataValue);
+    return (filterValue === ANY_VALUE) || (parseInt(filterValue, 10) === dataValue);
   };
 
   var isInRangePrice = function (item) {
@@ -127,10 +127,10 @@ window.initializePins = function () {
 
   var applyApartmentFilters = function (item) {
     return isInRangeType(item) &&
-    isInRangePrice(item) &&
-    isInRangeNumeric(housingRooms.value, item.offer.rooms) &&
-    isInRangeNumeric(housingGuests.value, item.offer.guests) &&
-    isInRangeFeatures(item);
+      isInRangePrice(item) &&
+      isInRangeNumeric(housingRooms.value, item.offer.rooms) &&
+      isInRangeNumeric(housingGuests.value, item.offer.guests) &&
+      isInRangeFeatures(item);
   };
 
   var pinClickHandler = function (event) {

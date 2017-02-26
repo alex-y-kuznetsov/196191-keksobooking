@@ -10,8 +10,14 @@ window.utils = (function () {
   };
 
   var toggleAria = function (element) {
-    (element.getAttribute('aria-pressed') === 'true') ? element.setAttribute('aria-pressed', 'false') : element.setAttribute('aria-pressed', 'true');
-    (element.getAttribute('aria-hidden') === 'true') ? element.setAttribute('aria-hidden', 'false') : element.setAttribute('aria-hidden', 'true');
+    element.setAttribute('aria-pressed', element.getAttribute('aria-pressed') === 'true'
+      ? 'false'
+      : 'true'
+    );
+    element.setAttribute('aria-pressed', element.getAttribute('aria-pressed') === 'true'
+      ? 'false'
+      : 'true'
+    );
   };
 
   return {
