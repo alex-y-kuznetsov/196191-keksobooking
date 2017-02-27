@@ -9,6 +9,7 @@ window.utils = (function () {
     return (event.keyCode && event.keyCode === ENTER_KEY_CODE) || event.type === 'click';
   };
 
+  // Изменение ARIA-ролей
   var togglePressed = function (element) {
     element.setAttribute('aria-pressed', element.getAttribute('aria-pressed') === 'true'
       ? 'false'
