@@ -15,12 +15,16 @@ window.showCard = (function () {
   var dialogFeatures = dialog.querySelector('.lodge__features');
   var dialogDescription = dialog.querySelector('.lodge__description');
   var dialogPhotos = dialog.querySelector('.lodge__photos');
+  var dialogIsOpen = false;
 
   dialog.style.display = 'none';
-  window.utils.toggleHidden(dialog);
+  window.utils.toggleAria('aria-hidden', dialog);
 
   var openDialog = function (data) {
-    window.utils.toggleHidden(dialog);
+    if(!dialogIsOpen) {
+      window.utils.toggleAria('aria-hidden', dialog);
+      dialogIsOpen = true;
+    };
     dialog.style.display = 'block';
 
     dialogImage.setAttribute('src', data.author.avatar);
@@ -57,11 +61,12 @@ window.showCard = (function () {
   var closeDialogHandler = function (evt) {
     if (window.utils.eventType(evt)) {
       dialog.style.display = 'none';
-      window.utils.toggleHidden(dialog);
+      window.utils.toggleAria('aria-hidden', dialog);
       if (typeof onDialogClose === 'function') {
         onDialogClose();
       }
     }
+    dialogIsOpen = false;
   };
 
   dialogCloseBtn.addEventListener('click', closeDialogHandler);

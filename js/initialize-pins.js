@@ -49,7 +49,7 @@ window.initializePins = function () {
     var pinActive = document.querySelector('.pin--active');
     if (pinActive) {
       pinActive.classList.remove('pin--active');
-      window.utils.togglePressed(pinActive);
+      window.utils.toggleAria('aria-pressed', pinActive);
     }
   };
 
@@ -58,7 +58,7 @@ window.initializePins = function () {
     if (pin) {
       clearPins();
       pin.classList.add('pin--active');
-      window.utils.togglePressed(pin);
+      window.utils.toggleAria('aria-pressed', pin);
     }
   };
 

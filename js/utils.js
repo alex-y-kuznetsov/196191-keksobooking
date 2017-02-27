@@ -10,14 +10,8 @@ window.utils = (function () {
   };
 
   // Изменение ARIA-ролей
-  var togglePressed = function (element) {
-    element.setAttribute('aria-pressed', element.getAttribute('aria-pressed') === 'true'
-      ? 'false'
-      : 'true'
-    );
-  };
-  var toggleHidden = function (element) {
-    element.setAttribute('aria-hidden', element.getAttribute('aria-hidden') === 'true'
+  var toggleAria = function (attribute, element) {
+    element.setAttribute(attribute, element.getAttribute(attribute) === 'true'
       ? 'false'
       : 'true'
     );
@@ -25,7 +19,6 @@ window.utils = (function () {
 
   return {
     eventType: eventType,
-    togglePressed: togglePressed,
-    toggleHidden: toggleHidden
+    toggleAria: toggleAria
   };
 })();
