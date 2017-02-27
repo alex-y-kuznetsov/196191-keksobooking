@@ -9,12 +9,9 @@ window.utils = (function () {
     return (event.keyCode && event.keyCode === ENTER_KEY_CODE) || event.type === 'click';
   };
 
-  var toggleAria = function (element) {
-    element.setAttribute('aria-pressed', element.getAttribute('aria-pressed') === 'true'
-      ? 'false'
-      : 'true'
-    );
-    element.setAttribute('aria-pressed', element.getAttribute('aria-pressed') === 'true'
+  // Изменение ARIA-ролей
+  var toggleAria = function (attribute, element) {
+    element.setAttribute(attribute, element.getAttribute(attribute) === 'true'
       ? 'false'
       : 'true'
     );

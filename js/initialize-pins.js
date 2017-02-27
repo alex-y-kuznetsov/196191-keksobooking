@@ -4,6 +4,7 @@ window.initializePins = function () {
   var pinMap = document.querySelector('.tokyo__pin-map');
   var DATA_URL = 'https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data';
   var similarApartments = [];
+  var currentApartments = [];
 
   // Поиск похожих объявлений
   var getData = function () {
@@ -17,11 +18,11 @@ window.initializePins = function () {
   getData();
 
   // Отрисовка клона
-  var drawClonePin = function (data) {
+  var drawClonePin = function (index, data) {
     var pinTemplateElement = document.querySelector('#pin-template');
     var pinElementToClone = pinTemplateElement.content.querySelector('.element-to-clone');
     var newPinElement = pinElementToClone.cloneNode(true);
-    newPinElement.dataset.pin = JSON.stringify(data);
+    newPinElement.dataset.index = index;
     var avatar = newPinElement.querySelector('img');
 
     avatar.src = data.author.avatar;
@@ -36,12 +37,11 @@ window.initializePins = function () {
     return newPinElement;
   };
 
-  // Отрисовка похожих объявлений
-  var drawSimilarApartments = function (arr) {
-    arr.forEach(function (item) {
-      pinMap.appendChild(drawClonePin(item));
+  var drawSimilarApartments = function (arr) {  // new
+    currentApartments = arr;
+    arr.forEach(function (item, index) {
+      pinMap.appendChild(drawClonePin(index, item));
     });
-
   };
 
   // Очистка пинов
@@ -49,7 +49,7 @@ window.initializePins = function () {
     var pinActive = document.querySelector('.pin--active');
     if (pinActive) {
       pinActive.classList.remove('pin--active');
-      window.utils.toggleAria(pinActive);
+      window.utils.toggleAria('aria-pressed', pinActive);
     }
   };
 
@@ -58,7 +58,7 @@ window.initializePins = function () {
     if (pin) {
       clearPins();
       pin.classList.add('pin--active');
-      window.utils.toggleAria(pin);
+      window.utils.toggleAria('aria-pressed', pin);
     }
   };
 
@@ -85,12 +85,8 @@ window.initializePins = function () {
     pinMap.removeEventListener('keydown', pinEnterKeyHandler);
   };
 
-  // Проверки фильтров
-  var isInRangeType = function (data) {
-    return (housingType.value === ANY_VALUE) || (housingType.value === data.offer.type);
-  };
-  var isInRangeNumeric = function (filterValue, dataValue) {
-    return (filterValue === ANY_VALUE) || (parseInt(filterValue, 10) === dataValue);
+  var isInRangeBasic = function (filterValue, dataValue) {
+    return (filterValue === ANY_VALUE) || (filterValue === dataValue);
   };
 
   var isInRangePrice = function (item) {
@@ -126,28 +122,28 @@ window.initializePins = function () {
   };
 
   var applyApartmentFilters = function (item) {
-    return isInRangeType(item) &&
+    return isInRangeBasic(housingType.value, item.offer.type.toString()) &&
       isInRangePrice(item) &&
-      isInRangeNumeric(housingRooms.value, item.offer.rooms) &&
-      isInRangeNumeric(housingGuests.value, item.offer.guests) &&
+      isInRangeBasic(housingRooms.value, item.offer.rooms.toString()) &&
+      isInRangeBasic(housingGuests.value, item.offer.guests.toString()) &&
       isInRangeFeatures(item);
   };
 
   var pinClickHandler = function (event) {
-    var pinData = event.target.closest('.pin').dataset.pin;
+    var pinDataIndex = event.target.closest('.pin').dataset.index;
     activatePin(event.target.closest('.pin'));
-    if (pinData) {
-      window.showCard(JSON.parse(event.target.closest('.pin').dataset.pin), function () {
+    if (pinDataIndex) {
+      window.showCard(currentApartments[pinDataIndex], function () {
         clearPins();
       });
     }
   };
   var pinEnterKeyHandler = function (event) {
-    var pinData = event.target.closest('.pin').dataset.pin;
+    var pinDataIndex = event.target.closest('.pin').dataset.index;
     if (window.utils.eventType(event)) {
       activatePin(event.target.closest('.pin'));
-      if (pinData) {
-        window.showCard(JSON.parse(event.target.closest('.pin').dataset.pin), function () {
+      if (pinDataIndex) {
+        window.showCard(currentApartments[pinDataIndex], function () {
           document.querySelector('.pin--active img').focus();
           clearPins();
         });
