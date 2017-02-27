@@ -19,10 +19,12 @@ window.showCard = (function () {
   var dialogPhotos = newDialogElement.querySelector('.lodge__photos');
 
   dialogToClone.style.display = 'none';
+  window.utils.toggleHidden(dialogToClone);
   newDialogElement.style.display = 'none';
+  window.utils.toggleHidden(newDialogElement);
 
   var openDialog = function (data) {
-    window.utils.toggleAria(newDialogElement);
+    window.utils.toggleHidden(newDialogElement);
     newDialogElement.style.display = 'block';
 
     dialogImage.setAttribute('src', data.author.avatar);
@@ -60,18 +62,18 @@ window.showCard = (function () {
   // Скрытие карточки объявления
   var dialogCloseBtn = newDialogElement.querySelector('.dialog__close');
 
-  var closeDialog = function (evt) {
+  var closeDialogHandler = function (evt) {
     if (window.utils.eventType(evt)) {
       newDialogElement.style.display = 'none';
-      window.utils.toggleAria(newDialogElement);
+      window.utils.toggleHidden(newDialogElement);
       if (typeof onDialogClose === 'function') {
         onDialogClose();
       }
     }
   };
 
-  dialogCloseBtn.addEventListener('click', closeDialog);
-  dialogCloseBtn.addEventListener('keydown', closeDialog);
+  dialogCloseBtn.addEventListener('click', closeDialogHandler);
+  dialogCloseBtn.addEventListener('keydown', closeDialogHandler);
 
   return function (data, cb) {
     openDialog(data);
