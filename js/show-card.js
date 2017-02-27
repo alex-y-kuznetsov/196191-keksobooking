@@ -5,27 +5,24 @@ window.showCard = (function () {
   // Показ карточки объявления
   var tokyo = document.querySelector('.tokyo');
   var onDialogClose = null;
-  var dialogToClone = document.querySelector('.dialog');
-  var newDialogElement = dialogToClone.cloneNode(true);
-  var dialogImage = newDialogElement.querySelector('img');
-  var dialogTitle = newDialogElement.querySelector('.lodge__title');
-  var dialogAddress = newDialogElement.querySelector('.lodge__address');
-  var dialogPrice = newDialogElement.querySelector('.lodge__price');
-  var dialogType = newDialogElement.querySelector('.lodge__type');
-  var dialogRoomsAndGuests = newDialogElement.querySelector('.lodge__rooms-and-guests');
-  var dialogCheckIn = newDialogElement.querySelector('.lodge__checkin-time');
-  var dialogFeatures = newDialogElement.querySelector('.lodge__features');
-  var dialogDescription = newDialogElement.querySelector('.lodge__description');
-  var dialogPhotos = newDialogElement.querySelector('.lodge__photos');
+  var dialog = document.querySelector('.dialog');
+  var dialogImage = dialog.querySelector('img');
+  var dialogTitle = dialog.querySelector('.lodge__title');
+  var dialogAddress = dialog.querySelector('.lodge__address');
+  var dialogPrice = dialog.querySelector('.lodge__price');
+  var dialogType = dialog.querySelector('.lodge__type');
+  var dialogRoomsAndGuests = dialog.querySelector('.lodge__rooms-and-guests');
+  var dialogCheckIn = dialog.querySelector('.lodge__checkin-time');
+  var dialogFeatures = dialog.querySelector('.lodge__features');
+  var dialogDescription = dialog.querySelector('.lodge__description');
+  var dialogPhotos = dialog.querySelector('.lodge__photos');
 
-  dialogToClone.style.display = 'none';
-  window.utils.toggleHidden(dialogToClone);
-  newDialogElement.style.display = 'none';
-  window.utils.toggleHidden(newDialogElement);
+  dialog.style.display = 'none';
+  window.utils.toggleHidden(dialog);
 
   var openDialog = function (data) {
-    window.utils.toggleHidden(newDialogElement);
-    newDialogElement.style.display = 'block';
+    window.utils.toggleHidden(dialog);
+    dialog.style.display = 'block';
 
     dialogImage.setAttribute('src', data.author.avatar);
     dialogImage.setAttribute('alt', 'Avatar');
@@ -38,7 +35,6 @@ window.showCard = (function () {
     dialogDescription.innerText = data.offer.description;
     dialogFeatures.innerHTML = '';
     dialogPhotos.innerHTML = '';
-    newDialogElement.classList.add('dialog');
 
     data.offer.features.forEach(function (item) {
       var featureElement = document.createElement('span');
@@ -54,18 +50,15 @@ window.showCard = (function () {
       imageElement.src = item;
       dialogPhotos.appendChild(imageElement);
     });
-
-    tokyo.appendChild(newDialogElement);
-    return newDialogElement;
   };
 
   // Скрытие карточки объявления
-  var dialogCloseBtn = newDialogElement.querySelector('.dialog__close');
+  var dialogCloseBtn = dialog.querySelector('.dialog__close');
 
   var closeDialogHandler = function (evt) {
     if (window.utils.eventType(evt)) {
-      newDialogElement.style.display = 'none';
-      window.utils.toggleHidden(newDialogElement);
+      dialog.style.display = 'none';
+      window.utils.toggleHidden(dialog);
       if (typeof onDialogClose === 'function') {
         onDialogClose();
       }

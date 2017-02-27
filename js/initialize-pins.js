@@ -85,7 +85,7 @@ window.initializePins = function () {
     pinMap.removeEventListener('keydown', pinEnterKeyHandler);
   };
 
-  var isInRange = function (filterValue, dataValue) {
+  var isInRangeBasic = function (filterValue, dataValue) {
     return (filterValue === ANY_VALUE) || (filterValue === dataValue);
   };
 
@@ -122,10 +122,10 @@ window.initializePins = function () {
   };
 
   var applyApartmentFilters = function (item) {
-    return isInRange(housingType.value, item.offer.type.toString()) &&
+    return isInRangeBasic(housingType.value, item.offer.type.toString()) &&
       isInRangePrice(item) &&
-      isInRange(housingRooms.value, item.offer.rooms.toString()) &&
-      isInRange(housingGuests.value, item.offer.guests.toString()) &&
+      isInRangeBasic(housingRooms.value, item.offer.rooms.toString()) &&
+      isInRangeBasic(housingGuests.value, item.offer.guests.toString()) &&
       isInRangeFeatures(item);
   };
 
