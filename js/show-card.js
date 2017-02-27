@@ -21,10 +21,10 @@ window.showCard = (function () {
   window.utils.toggleAria('aria-hidden', dialog);
 
   var openDialog = function (data) {
-    if(!dialogIsOpen) {
+    if (!dialogIsOpen) {
       window.utils.toggleAria('aria-hidden', dialog);
       dialogIsOpen = true;
-    };
+    }
     dialog.style.display = 'block';
 
     dialogImage.setAttribute('src', data.author.avatar);
