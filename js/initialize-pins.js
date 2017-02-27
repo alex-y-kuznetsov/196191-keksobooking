@@ -130,20 +130,20 @@ window.initializePins = function () {
   };
 
   var pinClickHandler = function (event) {
-    var pinData = event.target.closest('.pin').dataset.index;
+    var pinDataIndex = event.target.closest('.pin').dataset.index;
     activatePin(event.target.closest('.pin'));
-    if (pinData) {
-      window.showCard(currentApartments[event.target.closest('.pin').dataset.index], function () {
+    if (pinDataIndex) {
+      window.showCard(currentApartments[pinDataIndex], function () {
         clearPins();
       });
     }
   };
   var pinEnterKeyHandler = function (event) {
-    var pinData = event.target.closest('.pin').dataset.index;
+    var pinDataIndex = event.target.closest('.pin').dataset.index;
     if (window.utils.eventType(event)) {
       activatePin(event.target.closest('.pin'));
-      if (pinData) {
-        window.showCard(currentApartments[event.target.closest('.pin').dataset.index], function () {
+      if (pinDataIndex) {
+        window.showCard(currentApartments[pinDataIndex], function () {
           document.querySelector('.pin--active img').focus();
           clearPins();
         });
