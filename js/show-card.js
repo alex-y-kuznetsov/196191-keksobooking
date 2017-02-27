@@ -3,7 +3,6 @@
 window.showCard = (function () {
 
   // Показ карточки объявления
-  var tokyo = document.querySelector('.tokyo');
   var onDialogClose = null;
   var dialog = document.querySelector('.dialog');
   var dialogImage = dialog.querySelector('img');
